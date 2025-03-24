@@ -1,4 +1,4 @@
-package com.theezy.exceptions;
+package com.theezy.utils.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,4 +13,10 @@ public class ExceptionHandlers {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public ResponseEntity<ErrorResponse> handleUserAlreadyExistException(UserAlreadyExistException e){
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 }

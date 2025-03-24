@@ -1,4 +1,4 @@
-package com.theezy.exceptions;
+package com.theezy.utils.exceptions;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
