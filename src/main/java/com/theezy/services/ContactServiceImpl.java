@@ -30,12 +30,10 @@ public class ContactServiceImpl implements ContactService{
         contactRepository.save(newContact);
         return ContactMapper.mapContactToResponse(newContact);
     }
-
     @Override
     public void deleteOneContact(String phoneNumber) {
         contactRepository.deleteByPhoneNumber(phoneNumber);
     }
-
     @Override
     public ContactResponse editContact(ContactRequest contactRequest) {
         Optional<Contact> existingContact = contactRepository.findContactByPhoneNumber(contactRequest.getPhoneNumber());

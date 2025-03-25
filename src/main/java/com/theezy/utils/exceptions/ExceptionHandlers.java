@@ -13,6 +13,12 @@ public class ExceptionHandlers {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(ContactNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleContactAlreadyExist(ContactNotFoundException e){
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
     @ExceptionHandler(UserAlreadyExistException.class)
     public ResponseEntity<ErrorResponse> handleUserAlreadyExistException(UserAlreadyExistException e){
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());

@@ -10,8 +10,6 @@ public interface ContactService {
     ContactResponse saveContact(ContactRequest contactRequest);
 
     void deleteOneContact(String phoneNumber);
-
     ContactResponse editContact(ContactRequest contactRequest);
-
     List<Contact> viewAllContacts();
 }
