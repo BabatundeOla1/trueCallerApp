@@ -10,6 +10,7 @@ import com.theezy.dto.response.UserLoginResponse;
 import com.theezy.dto.response.UserRegisterResponse;
 import com.theezy.utils.PasswordHashingService;
 import com.theezy.utils.exceptions.UserAlreadyExistException;
+import com.theezy.utils.mapper.ContactMapper;
 import com.theezy.utils.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,12 @@ public class UserServiceImpl implements UserService{
     @Override
     public ContactResponse saveContact(ContactRequest contactRequest) {
         return contactService.saveContact(contactRequest);
+    }
+
+    @Override
+    public ContactResponse deleteContact(String phoneNumber) {
+        contactService.deleteOneContact(phoneNumber);
+        return ContactMapper.mapToDeleteContact("Successfully deleted.");
     }
 
     private boolean checkIfUserExist(String phoneNumber){

@@ -20,4 +20,9 @@ public class ContactMapper {
         contactResponse.setData(contact.getId());
         return contactResponse;
     }
+    public static ContactResponse mapToDeleteContact(String message){
+        ContactResponse contactResponse = new ContactResponse();
+        contactResponse.setMessage("Successful");
+        return contactResponse;
+    }
 }

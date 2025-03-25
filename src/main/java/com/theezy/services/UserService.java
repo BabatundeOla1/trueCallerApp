@@ -13,5 +13,5 @@ public interface UserService {
     UserLoginResponse loginUser(UserLoginRequest userLoginRequest);
     ContactResponse saveContact(ContactRequest contactRequest);
 
-    void deleteContact(String phoneNumber);
+    ContactResponse deleteContact(String phoneNumber);
 }

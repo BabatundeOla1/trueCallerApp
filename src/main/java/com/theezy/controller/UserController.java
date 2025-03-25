@@ -36,7 +36,7 @@ public class UserController {
     }
 
     @PostMapping("/deleteContact")
-    public void deleteContact(@Valid @RequestBody String phoneNumber){
-        userService.deleteContact(phoneNumber);
+    public ResponseEntity<ContactResponse> deleteContact(@Valid @RequestBody String phoneNumber){
+        return new ResponseEntity<>(userService.deleteContact(phoneNumber), HttpStatus.OK);
     }
 }
