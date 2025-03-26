@@ -11,7 +11,7 @@ public interface UserService {
 
     UserRegisterResponse registerUser(UserRegisterRequest userRegisterRequest);
     UserLoginResponse loginUser(UserLoginRequest userLoginRequest);
-    ContactResponse saveContact(ContactRequest contactRequest);
-
-    ContactResponse deleteContact(String phoneNumber);
+//    ContactResponse saveContact(ContactRequest contactRequest);
+//
+//    ContactResponse deleteContact(String phoneNumber);
 }

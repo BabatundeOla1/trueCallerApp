@@ -92,4 +92,55 @@ class ContactServiceImplTest {
         assertEquals("New name", updatedContact.getName());
         assertEquals("2, new address, sabo, lagos", updatedContact.getAddress());
     }
+
+    @Test
+    public void testThatWhenContactIsSearchedByNameItReturnsContact(){
+        ContactRequest contactRequest = new ContactRequest();
+        setUpContact(contactRequest);
+        contactService.saveContact(contactRequest);
+        assertEquals(1, contactRepository.count());
+
+        Contact foundContact = contactService.searchContactByName(contactRequest.getName());
+        assertNotNull(foundContact);
+        assertEquals("Babatunde Olaleye", foundContact.getName());
+        assertEquals("emailAddress@gmail.com", foundContact.getEmail());
+        assertEquals("09012345678", foundContact.getPhoneNumber());
+    }
+
+    @Test
+    public void testThatYouCanSearchForContactByPhoneNumber(){
+        ContactRequest contactRequest = new ContactRequest();
+        setUpContact(contactRequest);
+        contactService.saveContact(contactRequest);
+        assertEquals(1, contactRepository.count());
+
+        Contact foundContact = contactService.searchContactByPhoneNumber(contactRequest.getPhoneNumber())
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found"));
+        assertNotNull(foundContact);
+        assertEquals("Babatunde Olaleye", foundContact.getName());
+        assertEquals("emailAddress@gmail.com", foundContact.getEmail());
+        assertEquals("09012345678", foundContact.getPhoneNumber());
+    }
+
+    @Test
+    public void testAllContactWithTheSameNameAreReturnedWhenYouSearchByName(){
+        ContactRequest contactRequest = new ContactRequest();
+        setUpContact(contactRequest);
+        contactService.saveContact(contactRequest);
+
+        ContactRequest secondContact = new ContactRequest();
+        contactRequest.setName("Babatunde");
+        contactRequest.setEmail("emailAddress@gmail.com");
+        contactRequest.setPhoneNumber("09012345678");
+        contactRequest.setAddress("1, address street, lagos, yaba");
+
+        assertEquals(1, contactRepository.count());
+
+        Contact foundContact = contactService.searchContactByPhoneNumber(contactRequest.getPhoneNumber())
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found"));
+        assertNotNull(foundContact);
+        assertEquals("Babatunde Olaleye", foundContact.getName());
+        assertEquals("emailAddress@gmail.com", foundContact.getEmail());
+        assertEquals("09012345678", foundContact.getPhoneNumber());
+    }
 }

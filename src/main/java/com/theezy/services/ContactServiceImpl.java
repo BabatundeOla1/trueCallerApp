@@ -30,9 +30,17 @@ public class ContactServiceImpl implements ContactService{
         contactRepository.save(newContact);
         return ContactMapper.mapContactToResponse(newContact);
     }
+
     @Override
-    public void deleteOneContact(String phoneNumber) {
+    public Contact searchContactByName(String name) {
+        return contactRepository.findContactByName(name);
+    }
+
+    @Override
+    public ContactResponse deleteOneContact(String phoneNumber) {
         contactRepository.deleteByPhoneNumber(phoneNumber);
+        return ContactMapper.mapToDeleteContact("Successfully deleted.");
+
     }
     @Override
     public ContactResponse editContact(ContactRequest contactRequest) {
@@ -53,6 +61,11 @@ public class ContactServiceImpl implements ContactService{
     @Override
     public List<Contact> viewAllContacts() {
         return contactRepository.findAll();
+    }
+
+    @Override
+    public Optional<Contact> searchContactByPhoneNumber(String phoneNumber) {
+        return  contactRepository.findContactByPhoneNumber(phoneNumber);
     }
 }
 

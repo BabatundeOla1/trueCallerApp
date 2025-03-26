@@ -99,50 +99,50 @@ class UserServiceImplTest {
         assertTrue(loggedInUser.isStatus());
     }
 
-    @Test
-    public void testThatUserCanRegister_UserCanLogin_UserCanSaveContact(){
-        UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        setUpUser(userRegisterRequest);
-        userService.registerUser(userRegisterRequest);
-        assertEquals(1, userRepository.count());
-
-        UserLoginRequest userLoginRequest = new UserLoginRequest();
-        setUserLogin(userLoginRequest);
-        UserLoginResponse loggedInUser = userService.loginUser(userLoginRequest);
-        assertTrue(loggedInUser.isStatus());
-
-        ContactRequest contactRequest = new ContactRequest();
-        setUpContact(contactRequest);
-        userService.saveContact(contactRequest);
-        assertEquals(2, contactRepository.count());
-    }
-
-    @Test
-    public void testThatUserCanSaveContactAndDeleteContact(){
-        UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
-        setUpUser(userRegisterRequest);
-        userService.registerUser(userRegisterRequest);
-        assertEquals(1, userRepository.count());
-
-        UserLoginRequest userLoginRequest = new UserLoginRequest();
-        setUserLogin(userLoginRequest);
-        UserLoginResponse loggedInUser = userService.loginUser(userLoginRequest);
-        assertTrue(loggedInUser.isStatus());
-
-        ContactRequest contactRequest = new ContactRequest();
-        setUpContact(contactRequest);
-        userService.saveContact(contactRequest);
-
-        ContactRequest secondContact = new ContactRequest();
-        secondContact.setName("Earth2");
-        secondContact.setEmail("Earth@gmail.com");
-        secondContact.setPhoneNumber("08063475087");
-        secondContact.setAddress("1, address street, lagos, yaba");
-        userService.saveContact(secondContact);
-        assertEquals(3, contactRepository.count());
-
-        userService.deleteContact("08063475087");
-        assertEquals(2, contactRepository.count());
-    }
+//    @Test
+//    public void testThatUserCanRegister_UserCanLogin_UserCanSaveContact(){
+//        UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
+//        setUpUser(userRegisterRequest);
+//        userService.registerUser(userRegisterRequest);
+//        assertEquals(1, userRepository.count());
+//
+//        UserLoginRequest userLoginRequest = new UserLoginRequest();
+//        setUserLogin(userLoginRequest);
+//        UserLoginResponse loggedInUser = userService.loginUser(userLoginRequest);
+//        assertTrue(loggedInUser.isStatus());
+//
+//        ContactRequest contactRequest = new ContactRequest();
+//        setUpContact(contactRequest);
+//        userService.saveContact(contactRequest);
+//        assertEquals(2, contactRepository.count());
+//    }
+//
+//    @Test
+//    public void testThatUserCanSaveContactAndDeleteContact(){
+//        UserRegisterRequest userRegisterRequest = new UserRegisterRequest();
+//        setUpUser(userRegisterRequest);
+//        userService.registerUser(userRegisterRequest);
+//        assertEquals(1, userRepository.count());
+//
+//        UserLoginRequest userLoginRequest = new UserLoginRequest();
+//        setUserLogin(userLoginRequest);
+//        UserLoginResponse loggedInUser = userService.loginUser(userLoginRequest);
+//        assertTrue(loggedInUser.isStatus());
+//
+//        ContactRequest contactRequest = new ContactRequest();
+//        setUpContact(contactRequest);
+//        userService.saveContact(contactRequest);
+//
+//        ContactRequest secondContact = new ContactRequest();
+//        secondContact.setName("Earth2");
+//        secondContact.setEmail("Earth@gmail.com");
+//        secondContact.setPhoneNumber("08063475087");
+//        secondContact.setAddress("1, address street, lagos, yaba");
+//        userService.saveContact(secondContact);
+//        assertEquals(3, contactRepository.count());
+//
+//        userService.deleteContact("08063475087");
+//        assertEquals(2, contactRepository.count());
+//    }
 
 }

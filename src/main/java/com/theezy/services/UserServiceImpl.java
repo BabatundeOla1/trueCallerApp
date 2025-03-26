@@ -53,18 +53,18 @@ public class UserServiceImpl implements UserService{
         }
         return UserMapper.mapUserToLoginResponse("successful");
     }
-
-    @Override
-    public ContactResponse saveContact(ContactRequest contactRequest) {
-        return contactService.saveContact(contactRequest);
-    }
-
-    @Override
-    public ContactResponse deleteContact(String phoneNumber) {
-        contactService.deleteOneContact(phoneNumber);
-        return ContactMapper.mapToDeleteContact("Successfully deleted.");
-    }
-
+//
+//    @Override
+//    public ContactResponse saveContact(ContactRequest contactRequest) {
+//        return contactService.saveContact(contactRequest);
+//    }
+//
+//    @Override
+//    public ContactResponse deleteContact(String phoneNumber) {
+//        contactService.deleteOneContact(phoneNumber);
+//        return ContactMapper.mapToDeleteContact("Successfully deleted.");
+//    }
+//
     private boolean checkIfUserExist(String phoneNumber){
         return userRepository.existsUserByContact_PhoneNumber(phoneNumber);
     }
