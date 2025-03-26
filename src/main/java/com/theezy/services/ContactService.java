@@ -14,4 +14,7 @@ public interface ContactService {
     ContactResponse editContact(ContactRequest contactRequest);
     List<Contact> viewAllContacts();
     Optional<Contact> searchContactByPhoneNumber(String phoneNumber);
+    Optional<Contact> blockContactByPhoneNumber(String phoneNumber);
+    Optional<Contact> unblockContactByPhoneNumber(String phoneNumber);
+    List<Contact> getBlockedContacts();
 }

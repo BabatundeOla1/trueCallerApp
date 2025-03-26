@@ -65,7 +65,36 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public Optional<Contact> searchContactByPhoneNumber(String phoneNumber) {
-        return  contactRepository.findContactByPhoneNumber(phoneNumber);
+        return  contactRepository.findContactByPhoneNumber(phoneNumber)
+                .filter(contact -> !contact.isBlocked());
+    }
+
+    @Override
+    public Optional<Contact> blockContactByPhoneNumber(String phoneNumber) {
+        Optional<Contact> foundContact = contactRepository.findContactByPhoneNumber(phoneNumber);
+        if (foundContact.isPresent()){
+            Contact contactToBlock = foundContact.get();
+            contactToBlock.setBlocked(true);
+            contactRepository.save(contactToBlock);
+            return Optional.of(contactToBlock);
+        }
+        return Optional.empty();
+    }
+    @Override
+    public Optional<Contact> unblockContactByPhoneNumber(String phoneNumber) {
+        Optional<Contact> foundContact = contactRepository.findContactByPhoneNumber(phoneNumber);
+        if (foundContact.isPresent()){
+            Contact contactToUnblock = foundContact.get();
+            contactToUnblock.setBlocked(false);
+            contactRepository.save(contactToUnblock);
+            return Optional.of(contactToUnblock);
+        }
+        return Optional.empty();
+    }
+
+    @Override
+    public List<Contact> getBlockedContacts() {
+        return contactRepository.findAllByBlockedIsTrue();
     }
 }
 

@@ -49,4 +49,20 @@ public class ContactController {
     public Optional<Contact> searchContactByName(@Valid @PathVariable("name")  String name){
         return contactService.searchContactByName(name);
     }
+
+    @PatchMapping("/block/{number}")
+    public Optional<Contact> blockContact(@PathVariable("number") String phoneNumber) {
+        return contactService.blockContactByPhoneNumber(phoneNumber);
+    }
+
+    @PatchMapping("/unblock/{number}")
+    public ResponseEntity<Contact> unblockContact(@PathVariable("number") String phoneNumber) {
+        Optional<Contact> unblockedContact = contactService.unblockContactByPhoneNumber(phoneNumber);
+        return unblockedContact.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/contacts/viewBlocked")
+    public List<Contact> getBlockedContacts() {
+        return contactService.getBlockedContacts();
+    }
 }
