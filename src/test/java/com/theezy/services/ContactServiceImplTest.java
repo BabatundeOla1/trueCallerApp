@@ -129,10 +129,7 @@ class ContactServiceImplTest {
         contactService.saveContact(contactRequest);
 
         ContactRequest secondContact = new ContactRequest();
-        contactRequest.setName("Babatunde");
-        contactRequest.setEmail("emailAddress@gmail.com");
-        contactRequest.setPhoneNumber("09012345678");
-        contactRequest.setAddress("1, address street, lagos, yaba");
+
 
         assertEquals(1, contactRepository.count());
 

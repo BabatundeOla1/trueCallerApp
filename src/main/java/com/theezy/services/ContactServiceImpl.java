@@ -32,7 +32,7 @@ public class ContactServiceImpl implements ContactService{
     }
 
     @Override
-    public Contact searchContactByName(String name) {
+    public Optional<Contact> searchContactByName(String name) {
         return contactRepository.findContactByName(name);
     }
 

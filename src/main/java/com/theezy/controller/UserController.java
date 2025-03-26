@@ -29,14 +29,4 @@ public class UserController {
     public ResponseEntity<UserLoginResponse> userLogin(@Valid @RequestBody UserLoginRequest userLoginRequest){
         return new ResponseEntity<>(userService.loginUser(userLoginRequest), HttpStatus.OK);
     }
-
-//    @PostMapping("/saveContact")
-//    public ResponseEntity<ContactResponse> saveContact(@Valid @RequestBody ContactRequest contactRequest){
-//        return new ResponseEntity<>(userService.saveContact(contactRequest), HttpStatus.OK);
-//    }
-//
-//    @PostMapping("/deleteContact")
-//    public ResponseEntity<ContactResponse> deleteContact(@Valid @RequestBody String phoneNumber){
-//        return new ResponseEntity<>(userService.deleteContact(phoneNumber), HttpStatus.OK);
-//    }
 }

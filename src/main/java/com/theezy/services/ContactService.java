@@ -9,7 +9,7 @@ import java.util.Optional;
 
 public interface ContactService {
     ContactResponse saveContact(ContactRequest contactRequest);
-    Contact searchContactByName(String name);
+    Optional<Contact> searchContactByName(String name);
     ContactResponse deleteOneContact(String phoneNumber);
     ContactResponse editContact(ContactRequest contactRequest);
     List<Contact> viewAllContacts();
