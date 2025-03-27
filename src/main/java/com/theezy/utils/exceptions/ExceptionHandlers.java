@@ -30,6 +30,12 @@ public class ExceptionHandlers {
         ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
+    @ExceptionHandler(UserLoginInvalidException.class)
+    public ResponseEntity<ErrorResponse> handleUserLoginInvalidException(UserLoginInvalidException e){
+        ErrorResponse errorResponse = new ErrorResponse(e.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
+    }
+
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -43,4 +49,5 @@ public class ExceptionHandlers {
         });
         return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
+
 }

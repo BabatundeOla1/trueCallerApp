@@ -100,7 +100,9 @@ class ContactServiceImplTest {
         contactService.saveContact(contactRequest);
         assertEquals(1, contactRepository.count());
 
-        Contact foundContact = contactService.searchContactByName(contactRequest.getName());
+        Contact foundContact = contactService.searchContactByName(contactRequest.getName())
+                .orElseThrow(() -> new ContactNotFoundException("Contact not found"));
+        ;
         assertNotNull(foundContact);
         assertEquals("Babatunde Olaleye", foundContact.getName());
         assertEquals("emailAddress@gmail.com", foundContact.getEmail());

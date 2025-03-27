@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 
 
 @Configuration
-//@Getter
 @Data
 @PropertySource("classpath:.env")
 public class NumVerifyConfiguration {

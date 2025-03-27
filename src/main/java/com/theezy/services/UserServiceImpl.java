@@ -10,6 +10,7 @@ import com.theezy.dto.response.UserLoginResponse;
 import com.theezy.dto.response.UserRegisterResponse;
 import com.theezy.utils.PasswordHashingService;
 import com.theezy.utils.exceptions.UserAlreadyExistException;
+import com.theezy.utils.exceptions.UserLoginInvalidException;
 import com.theezy.utils.mapper.ContactMapper;
 import com.theezy.utils.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,22 +50,11 @@ public class UserServiceImpl implements UserService{
         boolean isPasswordValid = PasswordHashingService.checkPassword(userLoginRequest.getPassword(), foundUser.getPassword());
 
         if (!isPasswordValid){
-            throw new IllegalArgumentException("Invalid password");
+            throw new UserLoginInvalidException("Invalid password");
         }
         return UserMapper.mapUserToLoginResponse("successful");
     }
-//
-//    @Override
-//    public ContactResponse saveContact(ContactRequest contactRequest) {
-//        return contactService.saveContact(contactRequest);
-//    }
-//
-//    @Override
-//    public ContactResponse deleteContact(String phoneNumber) {
-//        contactService.deleteOneContact(phoneNumber);
-//        return ContactMapper.mapToDeleteContact("Successfully deleted.");
-//    }
-//
+
     private boolean checkIfUserExist(String phoneNumber){
         return userRepository.existsUserByContact_PhoneNumber(phoneNumber);
     }

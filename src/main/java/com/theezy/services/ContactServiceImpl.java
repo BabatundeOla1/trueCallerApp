@@ -9,7 +9,6 @@ import com.theezy.utils.exceptions.ContactNotFoundException;
 import com.theezy.utils.mapper.ContactMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -42,6 +41,7 @@ public class ContactServiceImpl implements ContactService{
         return ContactMapper.mapToDeleteContact("Successfully deleted.");
 
     }
+
     @Override
     public ContactResponse editContact(ContactRequest contactRequest) {
         Optional<Contact> existingContact = contactRepository.findContactByPhoneNumber(contactRequest.getPhoneNumber());
@@ -65,8 +65,8 @@ public class ContactServiceImpl implements ContactService{
 
     @Override
     public Optional<Contact> searchContactByPhoneNumber(String phoneNumber) {
-        return  contactRepository.findContactByPhoneNumber(phoneNumber)
-                .filter(contact -> !contact.isBlocked());
+        return  contactRepository.findContactByPhoneNumber(phoneNumber);
+//                .filter(contact -> !contact.isBlocked());
     }
 
     @Override
@@ -80,6 +80,7 @@ public class ContactServiceImpl implements ContactService{
         }
         return Optional.empty();
     }
+
     @Override
     public Optional<Contact> unblockContactByPhoneNumber(String phoneNumber) {
         Optional<Contact> foundContact = contactRepository.findContactByPhoneNumber(phoneNumber);
