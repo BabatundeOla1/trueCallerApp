@@ -15,9 +15,9 @@ public class Contact{
     @Id
     private String id;
 
-    @NotEmpty(message = "Name can not be empty")
-    @NotNull(message = "Name is required")
-    @NotBlank(message = "Name is require")
+//    @NotEmpty(message = "Name can not be empty")
+//    @NotNull(message = "Name is required")
+//    @NotBlank(message = "Name is require")
     private String name;
 
     @NotEmpty(message = "email can not be empty")
@@ -25,14 +25,14 @@ public class Contact{
     @NotBlank(message = "email is require")
     private String email;
 
-    @NotEmpty(message = "phoneNumber can not be empty")
-    @NotNull(message = "phoneNumber is required")
-    @NotBlank(message = "phoneNumber is require")
+//    @NotEmpty(message = "phoneNumber can not be empty")
+//    @NotNull(message = "phoneNumber is required")
+//    @NotBlank(message = "phoneNumber is require")
     private String phoneNumber;
 
-    @NotEmpty(message = "address can not be empty")
-    @NotNull(message = "address is required")
-    @NotBlank(message = "address is require")
+//    @NotEmpty(message = "address can not be empty")
+//    @NotNull(message = "address is required")
+//    @NotBlank(message = "address is require")
     private String address;
 
     private boolean blocked;

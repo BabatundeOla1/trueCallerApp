@@ -10,12 +10,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
-
-@RestController("/contact")
-@Service
+@CrossOrigin(origins = "http://localhost:5173")
+@RequestMapping("/contact")
+@RestController
 public class ContactController {
     @Autowired
     private ContactService contactService;
@@ -33,6 +36,16 @@ public class ContactController {
     @PostMapping("/editContact")
     public ContactResponse editContact(@Valid @RequestBody ContactRequest contactRequest){
         return contactService.editContact(contactRequest);
+    }
+
+    @PostMapping("/update-userProfile/{userId}")
+    public ResponseEntity<Map<String, String>> updateUserProfile(@PathVariable("userId") String userId, @RequestBody Contact contact) {
+        String message = contactService.updateUserProfile(userId, contact);
+
+        Map<String, String> response = new HashMap<>();
+        response.put("message", message);
+
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/viewAllContact")

@@ -11,6 +11,8 @@ public interface ContactService {
     ContactResponse saveContact(ContactRequest contactRequest);
     Optional<Contact> searchContactByName(String name);
     ContactResponse deleteOneContact(String phoneNumber);
+
+    String updateUserProfile(String userId, Contact contact);
     ContactResponse editContact(ContactRequest contactRequest);
     List<Contact> viewAllContacts();
     Optional<Contact> searchContactByPhoneNumber(String phoneNumber);

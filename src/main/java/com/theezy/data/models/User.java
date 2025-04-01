@@ -31,7 +31,7 @@ public class User {
     @NotBlank(message = "password is require")
     private String password;
 
-    @NotNull(message = "Contact is required")
+//    @NotNull(message = "Contact is required")
     @Valid
     private Contact contact;
 }

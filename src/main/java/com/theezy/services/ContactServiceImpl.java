@@ -1,7 +1,9 @@
 package com.theezy.services;
 
 import com.theezy.data.models.Contact;
+import com.theezy.data.models.User;
 import com.theezy.data.repository.ContactRepository;
+import com.theezy.data.repository.UserRepository;
 import com.theezy.dto.request.ContactRequest;
 import com.theezy.dto.response.ContactResponse;
 import com.theezy.utils.exceptions.ContactAlreadyExist;
@@ -17,6 +19,9 @@ public class ContactServiceImpl implements ContactService{
 
     @Autowired
     private ContactRepository contactRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @Override
     public ContactResponse saveContact(ContactRequest contactRequest)  {
@@ -40,6 +45,20 @@ public class ContactServiceImpl implements ContactService{
         contactRepository.deleteByPhoneNumber(phoneNumber);
         return ContactMapper.mapToDeleteContact("Successfully deleted.");
 
+    }
+
+    @Override
+    public String updateUserProfile(String userId, Contact contact) {
+        Optional<User> foundUser = userRepository.findUserById(userId);
+        if (foundUser.isPresent()){
+            User updateUser = foundUser.get();
+            updateUser.getContact().setName("YOU");
+            updateUser.setContact(contact);
+            userRepository.save(updateUser);
+            return "Contact updated successfully!";
+        } else {
+            return "User not found!";
+        }
     }
 
     @Override

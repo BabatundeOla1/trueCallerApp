@@ -2,16 +2,13 @@ package com.theezy.services;
 
 import com.theezy.data.models.User;
 import com.theezy.data.repository.UserRepository;
-import com.theezy.dto.request.ContactRequest;
 import com.theezy.dto.request.UserLoginRequest;
 import com.theezy.dto.request.UserRegisterRequest;
-import com.theezy.dto.response.ContactResponse;
 import com.theezy.dto.response.UserLoginResponse;
 import com.theezy.dto.response.UserRegisterResponse;
 import com.theezy.utils.PasswordHashingService;
 import com.theezy.utils.exceptions.UserAlreadyExistException;
 import com.theezy.utils.exceptions.UserLoginInvalidException;
-import com.theezy.utils.mapper.ContactMapper;
 import com.theezy.utils.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,7 +24,9 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserRegisterResponse registerUser(UserRegisterRequest userRegisterRequest) {
-        if (checkIfUserExist(userRegisterRequest.getContact().getPhoneNumber())){
+        boolean isUserExist = checkIfUserExist(userRegisterRequest.getContact().getPhoneNumber()) ||
+                checkIfUserExistByEmail(userRegisterRequest.getContact().getEmail());
+        if (isUserExist){
             throw new UserAlreadyExistException("User already exist");
         }
 
@@ -37,6 +36,7 @@ public class UserServiceImpl implements UserService{
         user.setFirstName(userRegisterRequest.getFirstName());
         user.setLastName(userRegisterRequest.getLastName());
         user.setContact(userRegisterRequest.getContact());
+        user.getContact().setBlocked(false);
         userRegisterRequest.getContact().setName("You");
         user.setPassword(hashedPassword);
 
@@ -57,6 +57,9 @@ public class UserServiceImpl implements UserService{
 
     private boolean checkIfUserExist(String phoneNumber){
         return userRepository.existsUserByContact_PhoneNumber(phoneNumber);
+    }
+    private boolean checkIfUserExistByEmail(String email){
+        return userRepository.existsUserByContact_PhoneNumber(email);
     }
 
 }
