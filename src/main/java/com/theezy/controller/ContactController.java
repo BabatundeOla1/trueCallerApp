@@ -27,11 +27,13 @@ public class ContactController {
     public ResponseEntity<ContactResponse> saveContact(@Valid @RequestBody ContactRequest contactRequest){
         return new ResponseEntity<>(contactService.saveContact(contactRequest), HttpStatus.OK);
     }
-
-    @PostMapping("/deleteContact")
-    public ContactResponse deleteContact(@Valid @RequestBody String phoneNumber){
-        return  contactService.deleteOneContact(phoneNumber);
+    
+    @DeleteMapping("/deleteContact/{phoneNumber}")
+    public ResponseEntity<ContactResponse> deleteContact(@PathVariable("phoneNumber") String phoneNumber) {
+        ContactResponse response = contactService.deleteOneContact(phoneNumber);
+        return ResponseEntity.ok(response);
     }
+
 
     @PostMapping("/editContact")
     public ContactResponse editContact(@Valid @RequestBody ContactRequest contactRequest){
